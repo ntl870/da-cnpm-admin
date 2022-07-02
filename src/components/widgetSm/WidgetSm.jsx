@@ -18,10 +18,6 @@ export default function WidgetSm() {
                 <span className="widgetSmUserTitle">{user.email}</span>
               </div>
             </Box>
-            <button className="widgetSmButton">
-              View
-              <ArrowForwardIcon className="widgetSmIcon" />
-            </button>
           </li>
         ))}
       </ul>

@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { statisticSelector } from "redux/selectors";
+import { Chip } from "@material-ui/core";
 import "./widgetLg.css";
 
 export default function WidgetLg() {
@@ -50,7 +51,26 @@ export default function WidgetLg() {
               ${(item?.amount * item?.serviceFeePercentage).toFixed(1)}
             </td>
             <td className="widgetLgStatus" style={{ textAlign: "center" }}>
-              <Button type={item?.transaction?.status} />
+              <Chip
+                color="primary"
+                label={item?.transaction.status}
+                style={{
+                  letterSpacing: 1.2,
+                  fontSize: 14,
+                  backgroundColor: (() => {
+                    switch (item?.transaction.status) {
+                      case "transfer":
+                        return "#ffc107";
+                      case "charge":
+                        return "#28a745";
+                      case "refund":
+                        return "rgb(111 111 111)";
+                      default:
+                        return "#ffc107";
+                    }
+                  })(),
+                }}
+              />
             </td>
           </tr>
         ))}

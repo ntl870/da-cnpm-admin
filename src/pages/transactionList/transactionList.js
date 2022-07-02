@@ -12,7 +12,7 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { AttachMoney } from "@material-ui/icons";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
@@ -75,6 +75,7 @@ export default function TransactionList() {
                     Avatar
                   </TableCell>
                   <TableCell style={{ fontWeight: 600 }}>Shop's Name</TableCell>
+                  <TableCell style={{ fontWeight: 600 }}>User</TableCell>
                   <TableCell style={{ fontWeight: 600 }} align="center">
                     Date
                   </TableCell>
@@ -103,10 +104,8 @@ export default function TransactionList() {
                           <Avatar src={row.shop.avatar} alt="" />
                         </Box>
                       </TableCell>
-                      <TableCell>
-                        {row?.shop.name ? row?.shop.name : "xxx"}
-                      </TableCell>
-
+                      <TableCell>{row?.shop.name}</TableCell>
+                      <TableCell>{row?.user.name}</TableCell>
                       <TableCell align="center">
                         {new Date(
                           row?.transaction?.createdAt
@@ -129,7 +128,18 @@ export default function TransactionList() {
                           style={{
                             letterSpacing: 1.2,
                             fontSize: 14,
-                            backgroundColor: "#3bb077",
+                            backgroundColor: (() => {
+                              switch (row?.transaction.status) {
+                                case "transfer":
+                                  return "#ffc107";
+                                case "charge":
+                                  return "#28a745";
+                                case "refund":
+                                  return "rgb(111 111 111)";
+                                default:
+                                  return "#ffc107";
+                              }
+                            })(),
                           }}
                         />
                       </TableCell>

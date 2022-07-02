@@ -186,9 +186,6 @@ export default function Home() {
             </FormControl>
           </Box>
         </Box>
-        <Button color="primary" variant="contained">
-          Export
-        </Button>
       </Box>
       <Chart
         data={userData}
