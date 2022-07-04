@@ -4,9 +4,6 @@ import { Chip } from "@material-ui/core";
 import "./widgetLg.css";
 
 export default function WidgetLg() {
-  const Button = ({ type }) => {
-    return <button className={"widgetLgButton " + type}>{type}</button>;
-  };
   const { transactions } = useSelector(statisticSelector);
 
   return (
@@ -35,30 +32,30 @@ export default function WidgetLg() {
               <span className="widgetLgName">{item.shop.name}</span>
             </td>
             <td className="widgetLgDate" style={{ textAlign: "center" }}>
-              {new Date(item?.transaction?.createdAt).toLocaleDateString(
-                "en-us",
-                {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }
+              {new Date(item?.createdAt).toLocaleDateString("en-us", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </td>
+            <td className="widgetLgAmount" style={{ textAlign: "center" }}>
+              ${item?.order?.amount}
+            </td>
+            <td className="widgetLgAmount" style={{ textAlign: "center" }}>
+              $
+              {(item?.order.amount * item?.order.serviceFeePercentage).toFixed(
+                1
               )}
-            </td>
-            <td className="widgetLgAmount" style={{ textAlign: "center" }}>
-              ${item?.amount}
-            </td>
-            <td className="widgetLgAmount" style={{ textAlign: "center" }}>
-              ${(item?.amount * item?.serviceFeePercentage).toFixed(1)}
             </td>
             <td className="widgetLgStatus" style={{ textAlign: "center" }}>
               <Chip
                 color="primary"
-                label={item?.transaction.status}
+                label={item?.status}
                 style={{
                   letterSpacing: 1.2,
                   fontSize: 14,
                   backgroundColor: (() => {
-                    switch (item?.transaction.status) {
+                    switch (item?.status) {
                       case "transfer":
                         return "#ffc107";
                       case "charge":

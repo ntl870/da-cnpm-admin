@@ -105,31 +105,32 @@ export default function TransactionList() {
                         </Box>
                       </TableCell>
                       <TableCell>{row?.shop.name}</TableCell>
-                      <TableCell>{row?.user.name}</TableCell>
+                      <TableCell>{row?.user?.name}</TableCell>
                       <TableCell align="center">
-                        {new Date(
-                          row?.transaction?.createdAt
-                        ).toLocaleDateString("en-us", {
+                        {new Date(row?.createdAt).toLocaleDateString("en-us", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
                         })}
                       </TableCell>
                       <TableCell align="center">
-                        ${row?.amount ? row?.amount : "..."}
+                        ${row?.order.amount ?? "..."}
                       </TableCell>
                       <TableCell align="center">
-                        ${(row?.amount * row?.serviceFeePercentage).toFixed(1)}
+                        $
+                        {(
+                          row?.order.amount * row?.order?.serviceFeePercentage
+                        ).toFixed(1)}
                       </TableCell>
                       <TableCell align="center">
                         <Chip
                           color="primary"
-                          label={row?.transaction.status}
+                          label={row?.status}
                           style={{
                             letterSpacing: 1.2,
                             fontSize: 14,
                             backgroundColor: (() => {
-                              switch (row?.transaction.status) {
+                              switch (row?.status) {
                                 case "transfer":
                                   return "#ffc107";
                                 case "charge":

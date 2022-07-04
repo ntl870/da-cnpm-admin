@@ -1,5 +1,4 @@
 import "./widgetSm.css";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { userSelector } from "redux/selectors";
 import { useSelector } from "react-redux";
 import { Avatar, Box } from "@material-ui/core";
